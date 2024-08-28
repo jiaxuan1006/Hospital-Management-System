@@ -1,0 +1,126 @@
+package com.mycompany.oop_project;
+
+public class Appointment 
+{
+    private int day, month, hour, minute, year;
+    private Doctor doctor;
+    private Patient patient;
+
+    // Default constructor
+    public Appointment() {
+        year = 0;
+        day = 0;
+        month = 0;
+        hour = 0;
+        minute = 0;
+        doctor = null;
+        patient = null;
+    }
+
+    // Constructor overloading
+    public Appointment(int year, int day, int month, int hour, int minute, Doctor doctor, Patient patient) {
+        this.year = year;
+        this.day = day;
+        this.month = month;
+        this.hour = hour;
+        this.minute = minute;
+        this.doctor = doctor;
+        this.patient = patient;
+    }
+
+    public void setYear(int year)
+    {
+        this.year = year;
+    }
+    
+    public void setDay(int day) {
+        this.day = day;
+    }
+
+    public void setMonth(int month) {
+        this.month = month;
+    }
+    
+    public void setHour(int hour) {
+        this.hour = hour;
+    }
+
+    public void setMinute(int minute) {
+        this.minute = minute;
+    }
+    
+    public void setDoctor(Doctor doctor) {
+        this.doctor = doctor;
+    }
+    
+    public void setPatient(Patient patient)
+    {
+        this.patient = patient;
+    }
+    
+    public int getYear()
+    {
+        return year;
+    }
+
+    public int getDay() {
+        return day;
+    }
+
+    public int getMonth() {
+        return month;
+    }
+    
+    public int getHour() {
+        return hour;
+    }
+
+    public int getMinute() {
+        return minute;
+    }
+    
+    public Doctor getDoctor()
+    {
+        return doctor;
+    }
+
+    public Patient getPatient()
+    {
+        return patient;
+    }
+    
+    // Check whether it is clashed with the doctor's appointment list
+     public boolean checkAvaibility(int day, int month, int year, int hour, int minute, Doctor dr)
+    {
+        boolean status = false;
+        if(dr.getDrAppointment().size() == 0)
+        {
+            status = true;
+        }
+        else
+        {
+            for(int i = 0; i<dr.getDrAppointment().size(); i++)
+            {
+                if(dr.getDrAppointment().get(i).getYear() != year ||
+                    dr.getDrAppointment().get(i).getDay() != day ||
+                    dr.getDrAppointment().get(i).getMonth() != month || 
+                    dr.getDrAppointment().get(i).getHour() != hour || 
+                    dr.getDrAppointment().get(i).getMinute() != minute)
+                {
+                    status = true;
+                }
+            }
+        }
+        
+        return status;
+    }
+     
+    public void dispAppointment() 
+    {
+        System.out.println(String.format("%02d", getDay()) + "/" + String.format("%02d", getMonth()) + "/" + 
+                        String.format("%-6d", getYear()) + String.format("%02d", getHour()) + ":" +
+                        String.format("%02d", getMinute()) + "  " + String.format("%-25s", getPatient().getName()) +
+                        String.format("%-25s", getDoctor().getName()));
+    }
+}
+
